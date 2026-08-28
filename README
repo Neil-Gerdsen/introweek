@@ -1,0 +1,37 @@
+flowchart TD
+    A([START]) --> B[API URL instellen]
+    B --> C[Sets ophalen via Scryfall API]
+    C --> D{API-request gelukt?}
+
+    D -- Nee --> E[Toon foutmelding]
+    E --> Z([STOP])
+
+    D -- Ja --> F[JSON-response decoderen]
+    F --> G{JSON geldig?}
+
+    G -- Nee --> H[Toon foutmelding]
+    H --> Z
+
+    G -- Ja --> I[Sets uit data halen]
+    I --> J[Controleer set_type]
+    J --> K{Officiële set?}
+
+    K -- Nee --> L[Set overslaan]
+    L --> M{Meer sets?}
+
+    K -- Ja --> N[Selecteer benodigde gegevens]
+    N --> M
+
+    M -- Ja --> J
+    M -- Nee --> O[Sorteer sets op released_at]
+
+    O --> P[Maak sets.csv aan]
+    P --> Q[Schrijf CSV-header]
+    Q --> R[Schrijf alle sets naar CSV]
+    R --> S{CSV succesvol opgeslagen?}
+
+    S -- Nee --> T[Toon foutmelding]
+    T --> Z
+
+    S -- Ja --> U[Toon melding: CSV succesvol aangemaakt]
+    U --> Z([STOP])
