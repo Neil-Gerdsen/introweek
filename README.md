@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     A([START]) --> B[API URL instellen]
     B --> C[Sets ophalen via Scryfall API]
@@ -34,4 +35,5 @@ flowchart TD
     T --> Z
 
     S -- Ja --> U[Toon melding: CSV succesvol aangemaakt]
-    U --> Z([STOP])
+    U --> Z
+```
